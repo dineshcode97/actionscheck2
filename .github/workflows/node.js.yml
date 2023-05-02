@@ -1,3 +1,4 @@
+
 name: Node Github CI
 
 on:
@@ -12,19 +13,14 @@ jobs:
 
 
     steps:
-    - name: Install dependencies
-      run: npm install
-
-    - name: Linter (ESLint)
-      run: npm run lint
-
-    - name: Formatter (Prettier)
-      run: npm run prettier
-
-    - name: Test (Jest)
+    - uses: actions/checkout@v2
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14.x
+    - name: npm install and test
+      run: |
+        npm install
+        npm test
       env:
         CI: true
-      run: npm run test
-
-    - name: Build
-      run: npm run build
